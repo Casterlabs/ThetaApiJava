@@ -1,4 +1,4 @@
-package co.casterlabs.thetaapijava.realtime;
+package co.casterlabs.thetaapijava.realtime.events;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ import lombok.ToString;
 @JsonClass(exposeAll = true)
 public class ThetaChatMessage {
     @JsonField("message_id")
-    private String messageId;
+    protected String messageId;
 
-    private String text;
-    private long timestamp;
+    protected String text;
+    protected long timestamp;
 
-    private ThetaChatUser user;
-    private List<ThetaChatEmote> emotes;
+    protected ThetaChatUser user;
+    protected List<ThetaChatEmote> emotes;
 
 }

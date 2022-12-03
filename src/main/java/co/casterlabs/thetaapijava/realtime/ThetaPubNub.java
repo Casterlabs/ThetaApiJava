@@ -24,6 +24,8 @@ import co.casterlabs.apiutil.auth.ApiAuthException;
 import co.casterlabs.rakurai.json.Rson;
 import co.casterlabs.rakurai.json.element.JsonObject;
 import co.casterlabs.thetaapijava.ThetaAuth;
+import co.casterlabs.thetaapijava.realtime.events.ThetaChatHello;
+import co.casterlabs.thetaapijava.realtime.events.ThetaChatMessage;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 
@@ -55,12 +57,27 @@ public class ThetaPubNub implements Closeable {
                 String type = message.getString("type");
 
                 switch (type) {
-                    case "chat_message": {
-                        ThetaChatMessage chatMessage = Rson.DEFAULT.fromJson(message.get("data"), ThetaChatMessage.class);
-
-                        listener.onChatMessage(chatMessage);
+                    case "chat_message":
+                        listener.onChatMessage(
+                            Rson.DEFAULT
+                                .fromJson(message.get("data"), ThetaChatMessage.class)
+                        );
                         return;
-                    }
+
+                    case "hello_message":
+                        listener.onChatHello(
+                            Rson.DEFAULT
+                                .fromJson(message.get("data"), ThetaChatHello.class)
+                        );
+                        return;
+
+                    case "turn_on_channel":
+                        listener.onChannelOnline();
+                        return;
+
+                    case "turn_off_channel":
+                        listener.onChannelOffline();
+                        return;
 
                     default:
                         System.out.printf("[ThetaPubNub] Unrecognized message type: %s\n%s\n", type, messageString);

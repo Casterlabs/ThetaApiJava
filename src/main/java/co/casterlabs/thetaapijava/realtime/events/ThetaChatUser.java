@@ -1,4 +1,4 @@
-package co.casterlabs.thetaapijava.realtime;
+package co.casterlabs.thetaapijava.realtime.events;
 
 import co.casterlabs.rakurai.json.annotating.JsonClass;
 import co.casterlabs.rakurai.json.annotating.JsonField;
