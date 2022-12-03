@@ -64,8 +64,8 @@ public class ThetaPubNub implements Closeable {
 
                     default:
                         System.out.printf("[ThetaPubNub] Unrecognized message type: %s\n%s\n", type, messageString);
+                        return;
                 }
-                System.out.println(message);
             }
 
             @Override

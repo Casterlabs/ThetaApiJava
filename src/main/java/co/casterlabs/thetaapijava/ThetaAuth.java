@@ -57,7 +57,6 @@ public class ThetaAuth extends OAuthProvider {
 
             request.url(url);
         } else {
-            System.out.println(this.getAccessToken());
             request.addHeader("x-auth-user", this.getUserId());
             request.addHeader("x-auth-token", this.getAccessToken());
             request.addHeader("Authorization", "Bearer " + this.getAccessToken());
